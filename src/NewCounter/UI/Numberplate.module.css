@@ -1,0 +1,25 @@
+.number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1ea7fd;
+    height: 50px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.numberActive {
+    font-size: 50px;
+    color: darkred;
+}
+.error {
+    font-size: 15px;
+    font-weight: normal;
+}
+.errorIncorrect {
+    font-size: 15px;
+    color: red;
+    font-weight: bold;
+
+}

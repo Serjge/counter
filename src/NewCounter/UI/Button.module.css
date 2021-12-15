@@ -1,0 +1,17 @@
+.button {
+    margin: 5px;
+    background: #1ea7fd;
+    border: 0px ;
+    color: #cccccc;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 3px 15px;
+    border-radius: 5px;
+}
+.button:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+.button:hover {
+    background: #1d49aa;
+}

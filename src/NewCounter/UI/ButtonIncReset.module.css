@@ -1,0 +1,10 @@
+.wrapper__buttons {
+    height: 30px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    border: #1ea7fd 1px solid;
+    padding: 5px;
+    border-radius: 5px;
+    align-self:flex-end
+}
