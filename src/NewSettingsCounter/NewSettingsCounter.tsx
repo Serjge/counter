@@ -14,7 +14,6 @@ export const NewSettingsCounter = ({
                                        dispatch
                                    }: SettingsCounterPropsType) => {
 
-
     const onChangeStart = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch({type: "UPDATE_START_NUMBER", newStartNumber: +e.currentTarget.value})
         dispatch({type: "UPDATE_NUMBER", newNumber: +e.currentTarget.value})
