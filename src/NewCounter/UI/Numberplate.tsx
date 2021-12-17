@@ -4,17 +4,17 @@ import React from "react";
 type NumberplatePropsType = {
     number: number
     maxNumber: number
-    colorNumber?: string
+    maxColorNumber?: string
     error: string
 }
-export const Numberplate = ({number, maxNumber, colorNumber, error}: NumberplatePropsType) => {
+export const Numberplate = ({number, maxNumber, maxColorNumber, error}: NumberplatePropsType) => {
 
     const StyleNumber = `${styles.number} 
-    ${number === maxNumber ? styles.numberActive : ''} 
     ${error !== '' ? styles.error : ''}
     ${error === 'Incorrect Value' ? styles.errorIncorrect : ''}`
 
     return (
-        <div style={{color: colorNumber}} className={StyleNumber}>{error ? error : number}</div>
+        <div style={number === maxNumber ? {color: maxColorNumber, fontSize: '50px'} : {color: ''}}
+             className={StyleNumber}>{error ? error : number}</div>
     )
 }

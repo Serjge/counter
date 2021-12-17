@@ -1,47 +1,41 @@
 import styles from "./ButtonIncReset.module.css";
 import {Button} from "./Button";
 import React from "react";
+import {StateType} from "../../App";
+import {ActionType, UPDATE_NUMBER} from "../../reducer";
 
 type ButtonIncResetPropsType = {
-    number: number
-    onClickIncHandler: () => void
-    onClickResetHandler: () => void
-    nameInc: string
-    nameReset: string
-    maxNumber: number
-    colorButton?: string
-    nameColor?: string
-    error: string
-    startNumber: number
+    state: StateType
+    dispatch: (action: ActionType) => void
 }
 
 export const ButtonIncReset = ({
-                                   number,
-                                   onClickIncHandler,
-                                   onClickResetHandler,
-                                   nameInc,
-                                   nameReset,
-                                   maxNumber,
-                                   colorButton,
-                                   nameColor,
-                                   error,
-                                   startNumber
+                                   state,
+                                   dispatch
                                }: ButtonIncResetPropsType) => {
-    const disableStartButton = number === maxNumber || error !== ''
-    const disableResetButton = number === startNumber || error !== ''
+
+    const onClickIncHandler = () => {
+        dispatch({type: UPDATE_NUMBER, newNumber: state.number + 1})
+    }
+
+    const onClickResetHandler = () => {
+        dispatch({type: UPDATE_NUMBER, newNumber: state.startNumber})
+    }
+    const disableStartButton = state.number === state.maxNumber || state.error !== ''
+    const disableResetButton = state.number === state.startNumber || state.error !== ''
 
     return (
         <div className={styles.wrapper__buttons}>
             <Button disabled={disableStartButton}
                     onClick={onClickIncHandler}
-                    name={nameInc}
-                    color={nameColor}
-                    backgroundColor={colorButton}/>
+                    name={'Inc'}
+                    color={state.fontColorButton}
+                    backgroundColor={state.bgColorButton}/>
             <Button disabled={disableResetButton}
                     onClick={onClickResetHandler}
-                    name={nameReset}
-                    backgroundColor={colorButton}
-                    color={nameColor}
+                    name={'Reset'}
+                    backgroundColor={state.bgColorButton}
+                    color={state.fontColorButton}
             />
         </div>
     )
