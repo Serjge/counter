@@ -1,7 +1,7 @@
 .wrapper {
     margin:  10px;
     width: 150px;
-    padding: 10px;
+
 
     border: #1ea7fd 1px solid;
     padding: 5px;
@@ -46,7 +46,7 @@
 .wrapper__buttons button {
     margin: 5px;
     background: #1ea7fd;
-    border: 0px;
+    border: 0;
     color: #cccccc;
     font-size: 15px;
     font-weight: bold;

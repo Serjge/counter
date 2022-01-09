@@ -1,18 +1,18 @@
 import React from 'react';
 import './App.css';
-import {NewCounter} from './NewCounter/NewCounter';
-import {NewSettingsCounter} from "./NewSettingsCounter/NewSettingsCounter";
-import {NewSettingsColor} from "./NewSettingsColor/NewSettingsColor";
+import {Counter} from './Counter/Counter';
+import {SettingsCounter} from "./SettingsCounter/SettingsCounter";
+import {SettingsColor} from "./SettingsColor/SettingsColor";
 
 export function App() {
 
     return (
         <div>
             <div className={'wrapper'}>
-                <NewCounter/>
-                <NewSettingsCounter/>
+                <Counter/>
+                <SettingsCounter/>
             </div>
-            <NewSettingsColor/>
+            <SettingsColor/>
         </div>
     );
 }

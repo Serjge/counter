@@ -3,6 +3,7 @@ import {Button} from "./Button";
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../../store/store";
+import {UpdateNumberAC} from "../../reducers/CounterReducer";
 
 export const ButtonIncReset = () => {
 
@@ -10,11 +11,11 @@ export const ButtonIncReset = () => {
     const state = useSelector<rootReducerType, rootReducerType >(state => state)
 
     const onClickIncHandler = () => {
-        dispatch({type: 'UPDATE_NUMBER', newNumber: state.counter.number + 1})
+        dispatch(UpdateNumberAC(state.counter.number + 1))
     }
 
     const onClickResetHandler = () => {
-        dispatch({type: 'UPDATE_NUMBER', newNumber: state.counter.startNumber})
+        dispatch(UpdateNumberAC(state.counter.startNumber))
     }
     const disableStartButton = state.counter.number === state.counter.maxNumber || state.counter.error !== ''
     const disableResetButton = state.counter.number === state.counter.startNumber || state.counter.error !== ''

@@ -51,3 +51,4 @@ export type ActionType = ReturnType<typeof UpdateNumberAC>
     | ReturnType<typeof UpdateStartNumberAC>
     | ReturnType<typeof UpdateMaxNumberAC>
     | ReturnType<typeof UpdateErrorAC>
+
