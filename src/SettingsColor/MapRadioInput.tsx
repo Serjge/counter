@@ -1,13 +1,18 @@
 import styled from "styled-components";
 import React from "react";
-import { RadioNameType } from "./SettingsColor";
+import {RadioNameType} from "./SettingsColor";
 
 
 type MapRadioInputType = {
     RadioNames: RadioNameType[]
     setRadio: (value: string) => void
 }
-export const MapRadioInput = ({RadioNames, setRadio}: MapRadioInputType) => {
+export const MapRadioInput: React.FC<MapRadioInputType> = props => {
+
+    const {
+        RadioNames,
+        setRadio,
+    } = props
 
     const onChangeSetup = (e: React.ChangeEvent<HTMLInputElement>) => {
         setRadio(e.currentTarget.value)
@@ -17,7 +22,7 @@ export const MapRadioInput = ({RadioNames, setRadio}: MapRadioInputType) => {
         <InputsWrapper>
             {RadioNames.map((r, i) => {
                 return (
-                    <LabelInput  key={i}>
+                    <LabelInput key={i}>
                         <input defaultChecked={i === 0} value={r.value}
                                onChange={onChangeSetup}
                                name={'color'}

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import styled from 'styled-components';
 import {Button} from "../Counter/UI/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../store/store";
 import {
     BackgroundColorAC,
-    FontColorButtonAC,
+    FontColorButtonAC, initialSettingStateType,
     MaxColorNumberAC,
     NumberplateColorAC
 } from "../reducers/SettingsColorReducer";
@@ -18,9 +18,9 @@ export type RadioNameType = {
 }
 
 export const SettingsColor = () => {
-
+    console.log('Render Color settings')
     let dispatch = useDispatch()
-    const state = useSelector<rootReducerType, rootReducerType>(state => state)
+    const settingsColors = useSelector<rootReducerType, initialSettingStateType>(state => state.settingsColors)
 
     const RadioNames: RadioNameType[] = [
         {name: 'Background button', value: 'bg'},
@@ -32,17 +32,18 @@ export const SettingsColor = () => {
     const [radio, setRadio] = useState<string>(RadioNames[0].value)
     const [collapsed, setCollapsed] = useState<boolean>(false)
 
-    const onClickDefaultColors = () => {
+    const onClickDefaultColors = useCallback(() => {
         dispatch(BackgroundColorAC('#1ea7fd'))
         dispatch(FontColorButtonAC('#cccccc'))
         dispatch(MaxColorNumberAC('#8b0000'))
         dispatch(NumberplateColorAC('#1ea7fd'))
-    }
+    } ,[dispatch])
 
-    const disableButton = state.settingsColors.bgColorButton === '#1ea7fd'
-        && state.settingsColors.fontColorButton === '#cccccc'
-        && state.settingsColors.maxColorNumber === '#8b0000'
-        && state.settingsColors.numberplateColor === '#1ea7fd'
+    const disableButton = settingsColors.colorsButton.bgColorButton === '#1ea7fd'
+        && settingsColors.colorsButton.fontColorButton === '#cccccc'
+        && settingsColors.colorCounter.maxColorNumber === '#8b0000'
+        && settingsColors.colorCounter.numberplateColor === '#1ea7fd'
+
 
     return (
         <div>
@@ -56,8 +57,8 @@ export const SettingsColor = () => {
                         <HexPicker radio={radio}/>
                     </Wrapper>
                     <Button disabled={disableButton}
-                            color={state.settingsColors.fontColorButton}
-                            backgroundColor={state.settingsColors.bgColorButton}
+                            color={settingsColors.colorsButton.fontColorButton}
+                            backgroundColor={settingsColors.colorsButton.bgColorButton}
                             onClick={onClickDefaultColors}
                             name={'Default colors settings'}/>
                 </>

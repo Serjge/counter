@@ -10,7 +10,9 @@ let rootReducer=combineReducers({
 
 export type rootReducerType = ReturnType<typeof rootReducer>
 
-export let store=createStore(rootReducer, loadState())
+export let store=createStore(rootReducer,
+    loadState()
+)
 
 store.subscribe(()=>{
     saveState({

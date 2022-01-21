@@ -1,22 +1,31 @@
-type initialStateType = typeof initialState
+export type initialStateType = typeof initialState
 
-const initialState = {
-    number: 0,
-    startNumber: 0,
-    maxNumber: 5,
-    error: '',
+export const initialState = {
+    counter: {
+        number: 0,
+    },
+    setting: {
+        startNumber: 0,
+        maxNumber: 5,
+    },
+    errors: {
+        errorCounter: ''
+    },
 }
 
-export const CounterReducer = (state:initialStateType=initialState, action: ActionType): initialStateType => {
+export type SettingType = { startNumber: number, maxNumber: number, }
+
+export const CounterReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
+
     switch (action.type) {
         case 'UPDATE_NUMBER':
-            return {...state, number: action.newNumber}
+            return {...state, counter: {number: action.newNumber}}
         case 'UPDATE_START_NUMBER' :
-            return {...state, startNumber: action.newStartNumber}
+            return {...state, setting: {...state.setting, startNumber: action.newStartNumber}}
         case 'UPDATE_MAX_NUMBER' :
-            return {...state, maxNumber: action.newMaxNumber}
+            return {...state, setting: {...state.setting, maxNumber: action.newMaxNumber}}
         case 'UPDATE_ERROR':
-            return {...state, error: action.newError}
+            return {...state, errors: {errorCounter: action.newError}}
         default:
             return state
     }

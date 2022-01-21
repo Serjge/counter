@@ -1,23 +1,30 @@
-type initialStateType = typeof initialState
+export type initialSettingStateType = typeof initialState
 
 const initialState = {
 
-    bgColorButton: '#1ea7fd',
-    fontColorButton: '#cccccc',
-    maxColorNumber: '#8b0000',
-    numberplateColor: '#1ea7fd'
+    colorsButton: {
+        bgColorButton: '#1ea7fd',
+        fontColorButton: '#cccccc',
+    },
+    colorCounter: {
+        maxColorNumber: '#8b0000',
+        numberplateColor: '#1ea7fd'
+    },
 }
 
-export const SettingsColorReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
+export type colorCounterType= { maxColorNumber: string,
+    numberplateColor: string}
+
+export const SettingsColorReducer = (state: initialSettingStateType = initialState, action: ActionType): initialSettingStateType => {
     switch (action.type) {
         case 'BACKGROUND_COLOR_BUTTON':
-            return {...state, bgColorButton: action.color}
+            return {...state, colorsButton: {...state.colorsButton, bgColorButton: action.color}}
         case 'FONT_COLOR_BUTTON':
-            return {...state, fontColorButton: action.color}
+            return {...state, colorsButton: {...state.colorsButton, fontColorButton: action.color}}
         case 'MAX_NUMBER_COLOR':
-            return {...state, maxColorNumber: action.color}
+            return {...state, colorCounter: {...state.colorCounter, maxColorNumber: action.color}}
         case "NUMBERPLATE_COLOR":
-            return {...state, numberplateColor: action.color}
+            return {...state, colorCounter: {...state.colorCounter, numberplateColor: action.color}}
         default:
             return state
     }

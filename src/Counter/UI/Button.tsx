@@ -9,9 +9,10 @@ type ButtonPropsType = {
     backgroundColor?: string
 }
 
-export const Button = ({name,onClick,disabled,color,backgroundColor, ...props}: ButtonPropsType) => {
+export const Button = React.memo(({name,onClick,disabled,color,backgroundColor, ...props}: ButtonPropsType) => {
+    console.log(`render Button ${name}`)
 
     return (
         <button style={{ backgroundColor: backgroundColor, color: color  }} className={styles.button} disabled={disabled} onClick={onClick}  {...props}>{name}</button>
     )
-}
+})

@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../store/store";
 import {
     BackgroundColorAC,
-    FontColorButtonAC,
+    FontColorButtonAC, initialSettingStateType,
     MaxColorNumberAC,
     NumberplateColorAC
 } from "../reducers/SettingsColorReducer";
@@ -16,8 +16,8 @@ type HexPickerType = {
 
 export const HexPicker = ({radio}: HexPickerType) => {
 
-    const state = useSelector<rootReducerType, rootReducerType>(state => state)
-    let dispatch = useDispatch()
+    const {colorCounter,colorsButton} = useSelector<rootReducerType, initialSettingStateType>(state => state.settingsColors)
+    const dispatch = useDispatch()
 
     const onChangeColor = (color: string) => {
         switch (radio) {
@@ -35,13 +35,13 @@ export const HexPicker = ({radio}: HexPickerType) => {
     const setColor = (value: string) => {
         switch (value) {
             case 'bg':
-                return state.settingsColors.bgColorButton
+                return colorsButton.bgColorButton
             case 'color':
-                return state.settingsColors.fontColorButton
+                return colorsButton.fontColorButton
             case 'max':
-                return state.settingsColors.maxColorNumber
+                return colorCounter.maxColorNumber
             case 'numberplate':
-                return state.settingsColors.numberplateColor
+                return colorCounter.numberplateColor
         }
     }
 

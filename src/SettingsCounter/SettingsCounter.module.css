@@ -9,15 +9,6 @@
     /*display: flex;*/
     /*flex-direction: column;*/
 }
-.input {
-    width: 50px;
-    margin: 10px auto;
-}
-.inputError {
-    border: darkred 2px solid;
-    background: rgba(255, 99, 71, 0.5);
-    outline:none
-}
 .number {
     display: flex;
     align-items: center;

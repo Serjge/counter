@@ -1,44 +1,52 @@
-import React from "react";
+import React, {useCallback} from "react";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {rootReducerType} from "../../store/store";
+import {SettingType} from "../../reducers/CounterReducer";
+import {colorCounterType} from "../../reducers/SettingsColorReducer";
 
-export const Numberplate = () => {
+export const Numberplate = React.memo(() => {
 
-    const state = useSelector<rootReducerType, rootReducerType>(state => state)
+    const number = useSelector<rootReducerType, number>(state => state.counter.counter.number)
+    const {maxNumber} = useSelector<rootReducerType, SettingType>(state => state.counter.setting)
+    const error = useSelector<rootReducerType, string>(state => state.counter.errors.errorCounter)
+    const {
+        numberplateColor,
+        maxColorNumber
+    } = useSelector<rootReducerType, colorCounterType>(state => state.settingsColors.colorCounter)
 
-    const colorNumber = () => {
-        if (state.counter.error === 'Incorrect Value') {
+    const colorNumber = useCallback(() => {
+        if (error === 'Incorrect Value') {
             return 'red'
-        } else if (state.counter.number === state.counter.maxNumber) {
-            return state.settingsColors.maxColorNumber
+        } else if (number === maxNumber) {
+            return maxColorNumber
         } else {
             return '#cccccc'
         }
-    }
+    }, [error, number, maxNumber, maxColorNumber])
 
-    const fontSizeNumber = () => {
-        if (state.counter.error === 'Incorrect Value') {
+    const fontSizeNumber = useCallback(() => {
+        if (error === 'Incorrect Value') {
             return '20px'
-        } else if (state.counter.number === state.counter.maxNumber) {
+        } else if (number === maxNumber) {
             return '50px'
-        } else if (state.counter.error === '') {
+        } else if (error === '') {
             return '30px'
         } else {
             return '15px'
         }
-    }
+    }, [error, number, maxNumber])
 
     return (
         <Number colorNumber={colorNumber()}
                 fontSizeNumber={fontSizeNumber()}
-                maxColorNumber={state.settingsColors.maxColorNumber}
-                numberplateColor={state.settingsColors.numberplateColor}
+                maxColorNumber={maxColorNumber}
+                numberplateColor={numberplateColor}
         >
-            {state.counter.error ? state.counter.error : state.counter.number}
+            <NumberError number={number} error={error}/>
         </Number>
     )
-}
+})
 
 type PropsType = {
     colorNumber: string
@@ -48,6 +56,7 @@ type PropsType = {
 }
 
 const Number = styled.div<PropsType>`
+
   color: ${({colorNumber}) => colorNumber};
   display: flex;
   align-items: center;
@@ -59,3 +68,17 @@ const Number = styled.div<PropsType>`
   font-weight: bold;
   font-size: ${({fontSizeNumber}) => fontSizeNumber};
 `
+
+type NumberErrorPropsType = {
+    number: number
+    error: string
+}
+
+export const NumberError = React.memo(({number, error}: NumberErrorPropsType) => {
+
+    return (
+        <div>
+            {error ? error : number}
+        </div>
+    );
+});
